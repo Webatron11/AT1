@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-
-<div>
-    <h3>Items:</h3>
+<div id="header">
+    <h1>Generic Climbing Store's Product Database</h1>
+    Use the aptly labeled buttons to add products, delete products, update a product's stock, or filter the products by
+    pre-set criteria.
+</div>
+<br>
+<div id="tableDiv">
     <div id="itemList">
         <table id="productTable">
             <tr>
@@ -35,21 +39,28 @@
     </div>
 </div>
 <div id="userButtons">
-    <button type="button" id="addItem" onclick="location.href='./commands/addItem'">Add Item</button>
-    <button type="button" id="updateStock" onclick="location.href='./commands/updateStock'">Update Stock</button>
-    <button type="button" id="deleteItem" onclick="location.href='./commands/deleteItem'">Delete Item</button>
-    <form method="post" action="/" style="display: inline-block">
-        <input value="stockUnder" type="hidden" name="id">
-        <input type="submit" id="stockUnder5" value="Show items with stock under 5">
-    </form>
-    <form method="post" action="/" style="display: inline-block">
-        <input value="dateBefore" type="hidden" name="id">
-        <input type="submit" id="dateBefore" value="Show items acquired before July 1st 2024">
-    </form>
-    <form method="post" action="/" style="display: inline-block">
-        <input value="normal" type="hidden" name="id">
-        <input type="submit" id="normal" value="Show all items">
-    </form>
+    <div id='actionButtons'>
+        <button type="button" id="addItem" onclick="location.href='./commands/addItem'">Add Product</button>
+        <button type="button" id="updateStock" onclick="location.href='./commands/updateStock'">Update a Product's
+            Stock
+        </button>
+        <button type="button" id="deleteItem" onclick="location.href='./commands/deleteItem'">Delete Product</button>
+    </div>
+    <br>
+    <div id='filterButtons'>
+        <form method="post" action="/" style="display: inline-block">
+            <input value="stockUnder" type="hidden" name="id">
+            <input type="submit" id="stockUnder5" value="Show items with stock under 5">
+        </form>
+        <form method="post" action="/" style="display: inline-block">
+            <input value="dateBefore" type="hidden" name="id">
+            <input type="submit" id="dateBefore" value="Show items acquired before July 1st 2024">
+        </form>
+        <form method="post" action="/" style="display: inline-block">
+            <input value="normal" type="hidden" name="id">
+            <input type="submit" id="normal" value="Show all items">
+        </form>
+    </div>
 </div>
 </body>
 </html>

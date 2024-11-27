@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete Item</title>
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
+<h1>Delete Product</h1>
+Select the product you'd like to delete from the database. Then click the Delete button. CAREFUL, there is no
+confirmation message. If you need to return to the home page, hit the Go Back button.
 <form action='/database' id="deleteItem" method="post" autocomplete="off">
     <input value="deleteItem" type="hidden" name="id">
 
     <label for="productId">What item are you deleting?</label> <br>
-    <input list="items" name="item" id="productId" required> <br>
-
-    <datalist id="items">
+    <select name="item" id="productId" required>
         {% for item in items %}
-            <option value='{{ item }}'>
+        <option value='{{ item }}'> {{ item }}</option>
         {% endfor %}
-    </datalist>
+    </select> <br>
 
-    <input type="submit" id="delete" name="delete" value="Delete">
-    <input type="button" onclick="location.href='/'" value="Go Back"  name="goBack" id="goBack">
+    <input type="submit" id="delete" name="delete" value="Delete" class="reset">
+    <input type="button" onclick="location.href='/'" value="Go Back" name="goBack" id="goBack">
 </form>
 </body>
 </html>

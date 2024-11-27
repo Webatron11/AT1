@@ -1,14 +1,69 @@
-#productTable table {
-    border-collapse: collapse;
-    border: 1px solid rgba(255, 255, 255, 0);
-    text-align: center;
-    padding: 0;
+/*TODO Fix formatting of table (make scrollable, no spaces between cells)*/
+
+/* Sets font family for all elements) */
+* {
+    font-family: 'Fira Code', monospace;
 }
 
-#productTable tr:nth-child(odd) {
-    background-color: rgba(46, 35, 34, 0.66);
+/* Sets font size for body */
+body {
+    font-size: 14px;
+    margin: auto;
+    width: 90%;
+    text-align: justify-all;
+}
+
+/*Sets background of all pages*/
+body {
+    background: #282A36;
+}
+
+/*Sets font size for all buttons and input boxes */
+button, input {
+    font-size: 12px;
+    background: rgba(139, 181, 253, 0.6);
+}
+
+button, input[type=submit], input[type=reset], input[type=button] {
+    border: none;
+}
+
+.submit {
+    background: #50FA7B
+}
+.reset {
+    background: #FF5555
+}
+
+#addStock {
+    display: none;
+    border: none;
+}
+
+#productTable table {
+    width: 70%;
+    align-content: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px black solid;
+}
+
+#productTable table, th, td {
+    overflow-y: auto;
+    text-align: center;
+}
+
+#productTable td {
+    width: 10%;
+}
+
+#productTable th {
+    background: rgba(139, 181, 253, 0.6);
 }
 
 #productTable tr:hover {
-    background-color: rgba(1, 1, 1, 0.66)
+    background-color: #44475A
 }
+
+/*TODO Make index.html button's bigger, less ugly*/
+/*TODO Make all the input forms look better - Consistent sizing, centered on screen, bigger, same buttons as index*/

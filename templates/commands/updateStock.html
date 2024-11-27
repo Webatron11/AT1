@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Stock</title>
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
+<h1>Update Product Stock</h1>
+Select the product you wish to update stock for from the dropdown. Then, enter the price you paid for the stock and the
+amount the stock has changed. Finally, enter the date which the stock changed. Then, hit Submit. If you need to reset,
+the Reset button will do that. If you need to return to the home page, the Go Back button will do that.
 <form action='/database' id="updateStock" method="post" autocomplete="off">
     <input value="updateStock" type="hidden" name="id">
 
     <label for="productId">What item are you updating stock for?</label> <br>
-    <input list="items" name="item" id="productId" required> <br>
-
-    <datalist id="items">
+    <select name="item" id="productId" required>
         {% for item in items %}
-            <option value='{{ item }}'>
+        <option value='{{ item }}'> {{ item }}</option>
         {% endfor %}
-    </datalist>
+    </select> <br>
 
     <label for="productCost">What is the cost of the item?</label> <br>
-    <input id="productCost" type="text" name="stockPrice" required> <br>
+    <input id="productCost" type="number" name="stockPrice" required> <br>
 
     <label for="stockChange">How much did the stock change? (negative amount if stock has been removed)</label> <br>
     <input id="stockChange" type="number" name="stockChange" required> <br>
@@ -26,8 +29,8 @@
     <label for="stockDate">When was this stock changed?</label> <br>
     <input id="stockDate" type="datetime-local" name="stockDate" required> <br>
 
-    <input type="submit" id="submit" name="submit" value="Submit">
-    <input type="reset" id="reset" name="reset" value="Reset">
+    <input type="submit" id="submit" name="submit" value="Submit" class="submit">
+    <input type="reset" id="reset" name="reset" value="Reset" class="reset">
     <input type="button" onclick="location.href='/'" value="Go Back" name="goBack" id="goBack">
 </form>
 </body>

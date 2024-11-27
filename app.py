@@ -19,13 +19,13 @@ def indexPage():
             query = '''SELECT products.id, products.sku, products.name, products.supplier, s.cost, SUM(s.change) AS "stock", datetime((SELECT MIN(stock.date) from main.stock WHERE stock.id = s.id), 'unixepoch') AS "date" 
                                 FROM products 
                                 INNER JOIN main.stock s on products.id = s.id 
-                                WHERE (SELECT SUM(s.change) FROM products INNER JOIN main.stock s on products.id = s.id GROUP BY s.id) < 5
+                                WHERE (SELECT SUM(change) FROM stock WHERE id = s.id) < 5
                                 GROUP BY s.id;'''
         elif request.form.get('id') == 'dateBefore':
             query = '''SELECT products.id, products.sku, products.name, products.supplier, s.cost, SUM(s.change) AS "stock", datetime((SELECT MIN(stock.date) from main.stock WHERE stock.id = s.id), 'unixepoch') AS "date" 
                                             FROM products 
                                             INNER JOIN main.stock s on products.id = s.id 
-                                            WHERE (SELECT s.date FROM products INNER JOIN main.stock s on products.id = s.id GROUP BY s.id) < 1688169600
+                                            WHERE "date" < 1719792000
                                             GROUP BY s.id;'''
         elif request.form.get('id') == 'normal':
             query = '''SELECT products.id, products.sku, products.name, products.supplier, s.cost, SUM(s.change) AS "stock", datetime((SELECT MIN(stock.date) from main.stock WHERE stock.id = s.id), 'unixepoch') AS "date" 
@@ -37,14 +37,11 @@ def indexPage():
                             FROM products 
                             INNER JOIN main.stock s on products.id = s.id 
                             GROUP BY s.id;'''
+
     dbresult = sendDBQuery(query)
     rows = dbresult.fetchall()
-    try:
-        max_stock = max([rows[i][4] for i in range(len(rows))])
-    except ValueError:
-        max_stock = 0
 
-    return render_template('index.html', items=rows, max_stock=max_stock)
+    return render_template('index.html', items=rows)
 
 
 @app.route('/commands/updateStock')
@@ -78,8 +75,9 @@ def addItem():
     query = ''''''
     if request.form.get("id") == "addItem":
         if post_data['stockCost']:
-            query = f'''INSERT INTO main.products (name, supplier, sku) VALUES('{post_data['productName']}', '{post_data['productSupplier']}', '{post_data['productSKU']}');
-                        INSERT INTO main.stock VALUES(last_insert_rowid(), '{post_data['stockCost']}', '{post_data['stockUpdate']}', now());'''
+            query = f'''INSERT INTO main.products (name, supplier, sku) VALUES('{post_data['productName']}', '{post_data['productSupplier']}', '{post_data['productSKU']}');'''
+            dbresult = sendDBQuery(query)
+            query = f'''INSERT INTO main.stock VALUES({dbresult.lastrowid}, '{post_data['stockCost']}', '{post_data['stockUpdate']}', unixepoch('{post_data['stockDate']}'));'''
         else:
             query = f'''INSERT INTO main.products (name, supplier, sku) VALUES('{post_data['productName']}', '{post_data['productSupplier']}', '{post_data['productSKU']}');'''
     elif request.form.get("id") == "updateStock":

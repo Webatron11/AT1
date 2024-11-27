@@ -14,13 +14,18 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
-
+<h1>Add Product</h1>
+Input the product's information (SKU, Name, Supplier) and choose whether you wish to add stock for this new item. If you
+choose to add stock, enter the price at which you purchased the stock, the change to the stock, and the date which the
+change occurred. Then, hit submit. If you need to reset the form, the reset button will do that. If you need to return
+to the home page, hit the Go Back button.
 <form action="/database" method="post" autocomplete="off" id="addItem">
     <input value="addItem" type="hidden" name="id">
 
-    <label for="productSKU">Product SKU</label>
+    <label for="productSKU">Product SKU: </label><br>
     <input type="text" id="productSKU" name='productSKU' required><br>
 
     <label for="productName">Product Name:</label><br>
@@ -32,16 +37,19 @@
     <input type="checkbox" id="updateStock" name="updateStock" onchange="showUpdate(this)">
     <label for="updateStock">Do you want to add stock for this new item?</label><br>
 
-    <fieldset id="addStock" style="display: none">
+    <fieldset id="addStock">
         <label for="stockCost">Product Cost:</label><br>
-        <input type="text" id="stockCost" name="stockCost"><br>
+        <input type="number" id="stockCost" name="stockCost"><br>
 
         <label for="stockUpdate">Product Stock:</label><br>
-        <input type="text" id="stockUpdate" name="stockUpdate"><br>
+        <input type="number" id="stockUpdate" name="stockUpdate"><br>
+
+        <label for="stockDate">When was this stock changed?</label> <br>
+        <input id="stockDate" type="datetime-local" name="stockDate" required> <br>
     </fieldset>
 
-    <input type="submit" id="submit" name="submit" value="Submit">
-    <input type="reset" id="reset" name="reset" value="Reset">
+    <input type="submit" id="submit" name="submit" value="Submit" class="submit">
+    <input type="reset" id="reset" name="reset" value="Reset" class="reset">
     <input type="button" onclick="location.href='/'" value="Go Back" name="goBack" id="goBack">
 </form>
 
