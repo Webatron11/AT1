@@ -5,34 +5,52 @@
     font-family: 'Fira Code', monospace;
 }
 
-/* Sets font size for body */
+/* Sets font size, margin, width of content, text-align and background for body */
 body {
-    font-size: 14px;
+    font-size: 17px;
     margin: auto;
-    width: 90%;
+    width: 98%;
     text-align: justify-all;
-}
-
-/*Sets background of all pages*/
-body {
     background: #282A36;
 }
 
-/*Sets font size for all buttons and input boxes */
-button, input {
+/*Adds padding to form so its not close to the rest*/
+form {
+    padding: 10px;
+}
+
+/*Sets padding around input boxes, sets their width based off webpage size, sets font size*/
+input[type=number], input[type=text], input[type=datetime-local], select {
+    width: 30%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/*Sets font size for all buttons and input boxes, adds small border */
+button, input, select {
     font-size: 12px;
     background: rgba(139, 181, 253, 0.6);
+    border: solid black 2px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-family: "Fira Code SemiBold", monospace;
 }
 
-button, input[type=submit], input[type=reset], input[type=button] {
-    border: none;
-}
-
+/*Submit button background setting*/
 .submit {
     background: #50FA7B
 }
+
+/*Reset button background setting*/
 .reset {
     background: #FF5555
+}
+
+label {
+    font-family: 'Fira Code SemiBold', monospace;
+    font-size: 15px;
 }
 
 #addStock {
@@ -40,12 +58,17 @@ button, input[type=submit], input[type=reset], input[type=button] {
     border: none;
 }
 
+#tableDiv {
+    max-height: 50%;
+    border: 2px black solid;
+}
+
 #productTable table {
-    width: 70%;
+    width: 100%;
     align-content: center;
     border-collapse: collapse;
     border-spacing: 0;
-    border: 1px black solid;
+    border: 0 black solid;
 }
 
 #productTable table, th, td {
@@ -65,5 +88,23 @@ button, input[type=submit], input[type=reset], input[type=button] {
     background-color: #44475A
 }
 
+#actionButtons, #filterButtons {
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+}
+
+#actionButtons {
+    padding-bottom: 0;
+}
+
+#filterButtons {
+    padding-top: 0;
+}
+
+#filterButtons form {
+    padding: 0;
+    margin: 0;
+}
+
 /*TODO Make index.html button's bigger, less ugly*/
-/*TODO Make all the input forms look better - Consistent sizing, centered on screen, bigger, same buttons as index*/
