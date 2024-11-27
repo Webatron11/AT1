@@ -1,0 +1,14 @@
+#productTable table {
+    border-collapse: collapse;
+    border: 1px solid rgba(255, 255, 255, 0);
+    text-align: center;
+    padding: 0;
+}
+
+#productTable tr:nth-child(odd) {
+    background-color: rgba(46, 35, 34, 0.66);
+}
+
+#productTable tr:hover {
+    background-color: rgba(1, 1, 1, 0.66)
+}

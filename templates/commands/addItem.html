@@ -2,9 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Item</title>
+    <script type="application/javascript">
+        function showUpdate(x) {
+            console.log("run")
+            if (x.checked) {
+                document.getElementById("addStock").style.display = "block"
+                console.log("checked")
+            } else {
+                document.getElementById("addStock").style.display = "none"
+            }
+        }
+    </script>
 </head>
 <body>
+
+<form action="/database" method="post" autocomplete="off" id="addItem">
+    <input value="addItem" type="hidden" name="id">
+
+    <label for="productSKU">Product SKU</label>
+    <input type="text" id="productSKU" name='productSKU' required><br>
+
+    <label for="productName">Product Name:</label><br>
+    <input type="text" id="productName" name="productName" required><br>
+
+    <label for="productSupplier">Product Supplier:</label><br>
+    <input type="text" id="productSupplier" name="productSupplier" required><br>
+
+    <input type="checkbox" id="updateStock" name="updateStock" onchange="showUpdate(this)">
+    <label for="updateStock">Do you want to add stock for this new item?</label><br>
+
+    <fieldset id="addStock" style="display: none">
+        <label for="stockCost">Product Cost:</label><br>
+        <input type="text" id="stockCost" name="stockCost"><br>
+
+        <label for="stockUpdate">Product Stock:</label><br>
+        <input type="text" id="stockUpdate" name="stockUpdate"><br>
+    </fieldset>
+
+    <input type="submit" id="submit" name="submit" value="Submit">
+    <input type="reset" id="reset" name="reset" value="Reset">
+    <input type="button" onclick="location.href='/'" value="Go Back" name="goBack" id="goBack">
+</form>
 
 </body>
 </html>

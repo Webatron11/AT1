@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Delete Item</title>
 </head>
 <body>
-$END$
+<form action='/database' id="deleteItem" method="post" autocomplete="off">
+    <input value="deleteItem" type="hidden" name="id">
+
+    <label for="productId">What item are you deleting?</label> <br>
+    <input list="items" name="item" id="productId" required> <br>
+
+    <datalist id="items">
+        {% for item in items %}
+            <option value='{{ item }}'>
+        {% endfor %}
+    </datalist>
+
+    <input type="submit" id="delete" name="delete" value="Delete">
+    <input type="button" onclick="location.href='/'" value="Go Back"  name="goBack" id="goBack">
+</form>
 </body>
 </html>

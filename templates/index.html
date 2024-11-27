@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Inventory Manager</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
 
+<div>
+    <h3>Items:</h3>
+    <div id="itemList">
+        <table id="productTable">
+            <tr>
+                <th>#</th>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Supplier</th>
+                <th>Cost</th>
+                <th>Total Stock</th>
+                <th>Date Acquired</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>${{ item[4] }}</td>
+                <td>{{ item[5] }}</td>
+                <td>{{ item[6] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div id="userButtons">
+    <button type="button" id="addItem" onclick="location.href='./commands/addItem'">Add Item</button>
+    <button type="button" id="updateStock" onclick="location.href='./commands/updateStock'">Update Stock</button>
+    <button type="button" id="deleteItem" onclick="location.href='./commands/deleteItem'">Delete Item</button>
+    <form method="post" action="/" style="display: inline-block">
+        <input value="stockUnder" type="hidden" name="id">
+        <input type="submit" id="stockUnder5" value="Show items with stock under 5">
+    </form>
+    <form method="post" action="/" style="display: inline-block">
+        <input value="dateBefore" type="hidden" name="id">
+        <input type="submit" id="dateBefore" value="Show items acquired before July 1st 2024">
+    </form>
+    <form method="post" action="/" style="display: inline-block">
+        <input value="normal" type="hidden" name="id">
+        <input type="submit" id="normal" value="Show all items">
+    </form>
+</div>
 </body>
 </html>
