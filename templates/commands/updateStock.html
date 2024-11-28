@@ -1,3 +1,9 @@
+<!--
+    Created by Oscar Webb
+    Created on roughly 11/11
+    This is the html for the updateStock page
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +22,12 @@ the Reset button will do that. If you need to return to the home page, the Go Ba
     <label for="productId">What item are you updating stock for?</label> <br>
     <select name="item" id="productId" required>
         {% for item in items %}
-        <option value='{{ item }}'> {{ item }}</option>
+        <option value='{{ item }}'> {{ item }}</option> <!-- Uses Jinja formatting to pass in all products in the database -->
         {% endfor %}
     </select> <br>
 
     <label for="productCost">What is the cost of the item?</label> <br>
-    <input id="productCost" type="number" name="stockPrice" required> <br>
+    <input id="productCost" type="number" name="stockPrice" required step="0.01"> <br>
 
     <label for="stockChange">How much did the stock change? (negative amount if stock has been removed)</label> <br>
     <input id="stockChange" type="number" name="stockChange" required> <br>

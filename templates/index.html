@@ -1,3 +1,9 @@
+<!--
+    Created by Oscar Webb
+    Created on roughly 11/11
+    This is the html for the main page
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +30,7 @@
                 <th>Total Stock</th>
                 <th>Date Acquired</th>
             </tr>
-            {% for item in items %}
+            {% for item in items %} <!-- Uses Jinja templating to pass in database data -->
             <tr>
                 <td>{{ item[0] }}</td>
                 <td>{{ item[1] }}</td>

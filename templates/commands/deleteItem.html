@@ -1,3 +1,9 @@
+<!--
+    Created by Oscar Webb
+    Created on roughly 11/11
+    This is the html for the deleteItem page
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +21,7 @@ confirmation message. If you need to return to the home page, hit the Go Back bu
     <label for="productId">What item are you deleting?</label> <br>
     <select name="item" id="productId" required>
         {% for item in items %}
-        <option value='{{ item }}'> {{ item }}</option>
+        <option value='{{ item }}'> {{ item }}</option> <!-- Uses Jinja formatting to pass in all products in the database -->
         {% endfor %}
     </select> <br>
 

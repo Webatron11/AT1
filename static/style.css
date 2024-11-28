@@ -1,5 +1,3 @@
-/*TODO Fix formatting of table (make scrollable, no spaces between cells)*/
-
 /* Sets font family for all elements) */
 * {
     font-family: 'Fira Code', monospace;
@@ -11,7 +9,7 @@ body {
     margin: auto;
     width: 98%;
     text-align: justify-all;
-    background: #282A36;
+    background: rgba(144, 175, 224, 0.58);
 }
 
 /*Adds padding to form so its not close to the rest*/
@@ -48,21 +46,26 @@ button, input, select {
     background: #FF5555
 }
 
+/* Changes labels to fira code and set the font size*/
 label {
     font-family: 'Fira Code SemiBold', monospace;
     font-size: 15px;
 }
 
+/*The div which appears when you click the checkbox in the addItem page*/
+/*Makes it invisible by default and removes border*/
 #addStock {
     display: none;
     border: none;
 }
 
+/*Attempts to set the max table height. Gives it a border*/
 #tableDiv {
-    max-height: 50%;
+    max-height: 20%;
     border: 2px black solid;
 }
 
+/*Sets the table width, aligns all the text, removes any borders.*/
 #productTable table {
     width: 100%;
     align-content: center;
@@ -71,40 +74,46 @@ label {
     border: 0 black solid;
 }
 
+/*Makes it overflow and aligns text to center*/
 #productTable table, th, td {
     overflow-y: auto;
     text-align: center;
 }
 
+/*Sets width of columns*/
 #productTable td {
     width: 10%;
 }
 
+/*Sets background colour of headers*/
 #productTable th {
     background: rgba(139, 181, 253, 0.6);
 }
 
+/*Makes row change colour when hovered over*/
 #productTable tr:hover {
-    background-color: #44475A
+    background-color: rgba(68, 71, 90, 0.24)
 }
 
+/*Sets the position of the buttons underneath the table on the home page*/
 #actionButtons, #filterButtons {
     margin: auto;
     width: 30%;
     padding: 10px;
 }
 
+/*Ensures there isnt a weird gap between the two rows of buttons on the home page*/
 #actionButtons {
     padding-bottom: 0;
 }
 
+/*Ensures there isnt a weird gap between the two rows of buttons on the home page*/
 #filterButtons {
     padding-top: 0;
 }
 
+/*Gets rid of padding for the second row of buttons on the home page*/
 #filterButtons form {
     padding: 0;
     margin: 0;
 }
-
-/*TODO Make index.html button's bigger, less ugly*/

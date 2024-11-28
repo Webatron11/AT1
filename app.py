@@ -1,9 +1,14 @@
+# Created by Oscar Webb
+# Created on roughly 11/11
+# This is the python code which handles database and some website behaviour
+
 from flask import render_template, Flask, request, redirect
 from sqlite3 import connect
 
 app = Flask(__name__)
 
 
+# Used to send queries to the database
 def sendDBQuery(query: str):
     database = connect('./database.db')
     cursor = database.cursor()
@@ -12,8 +17,10 @@ def sendDBQuery(query: str):
     return result
 
 
+# Main page - Accepts GET and POST requests in order to enable filtering the database results
 @app.route('/', methods=['POST', 'GET'])
 def indexPage():
+    # Changes the database query depending on the button clicked
     if request.method == 'POST':
         if request.form.get('id') == 'stockUnder':
             query = '''SELECT products.id, products.sku, products.name, products.supplier, s.cost, SUM(s.change) AS "stock", datetime((SELECT MIN(stock.date) from main.stock WHERE stock.id = s.id), 'unixepoch') AS "date" 
@@ -41,9 +48,11 @@ def indexPage():
     dbresult = sendDBQuery(query)
     rows = dbresult.fetchall()
 
+    # Passes in array containing the database results
     return render_template('index.html', items=rows)
 
 
+# Handles the update stock page - fetches all product names and ids from the database and passes them into the html
 @app.route('/commands/updateStock')
 def updateStockPage():
     query = '''SELECT products.id, products.name FROM products;'''
@@ -54,11 +63,13 @@ def updateStockPage():
     return render_template('./commands/updateStock.html', items=items)
 
 
+# Handles the add Item page - Just returns the html, nothing special
 @app.route('/commands/addItem')
 def addItemPage():
     return render_template("./commands/addItem.html")
 
 
+# Handles the delete item page - fetches all product names and ids from the database and passes them into the html
 @app.route('/commands/deleteItem')
 def deleteItemPage():
     query = '''SELECT products.id, products.name FROM products;'''
@@ -69,6 +80,8 @@ def deleteItemPage():
     return render_template("./commands/deleteItem.html", items=items)
 
 
+# Handles all form submissions. Sends various queries based off which form was submitted. Accepts POST requests only.
+# Redirects to home page with code 303 to wipe HTML Post request body
 @app.route('/database/', methods=['POST'])
 def addItem():
     post_data = request.form.to_dict()
@@ -90,4 +103,5 @@ def addItem():
     return redirect("/", 303)
 
 
+# Runs website
 app.run()
