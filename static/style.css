@@ -46,6 +46,16 @@ button, input, select {
     background: #FF5555
 }
 
+#header section{
+  position: relative;
+  width: 50%;
+  border: 1px solid;
+}
+#header div {
+  float: right;
+}
+
+
 /* Changes labels to fira code and set the font size*/
 label {
     font-family: 'Fira Code SemiBold', monospace;
