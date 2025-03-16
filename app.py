@@ -1,6 +1,7 @@
 # Created by Oscar Webb
 # Created on roughly 11/11
 # This is the python code which handles database and some website behaviour
+from os import PathLike
 
 from flask import render_template, Flask, request, redirect
 from sqlite3 import connect
@@ -9,8 +10,8 @@ app = Flask(__name__)
 
 
 # Used to send queries to the database
-def sendDBQuery(query: str):
-    database = connect('./database.db')
+def sendDBQuery(query: str, path: str | PathLike[str]):
+    database = connect(path)
     cursor = database.cursor()
     result = cursor.execute(query)
     database.commit()
@@ -45,7 +46,7 @@ def indexPage():
                             INNER JOIN main.stock s on products.id = s.id 
                             GROUP BY s.id;'''
 
-    dbresult = sendDBQuery(query)
+    dbresult = sendDBQuery(query, './stock.db')
     rows = dbresult.fetchall()
 
     # Passes in array containing the database results
@@ -56,7 +57,7 @@ def indexPage():
 @app.route('/commands/updateStock')
 def updateStockPage():
     query = '''SELECT products.id, products.name FROM products;'''
-    dbresult = sendDBQuery(query)
+    dbresult = sendDBQuery(query, './stock.db')
     rows = dbresult.fetchall()
     items = [f"{i[1]} (ID: {i[0]})" for i in rows]
 
@@ -73,7 +74,7 @@ def addItemPage():
 @app.route('/commands/deleteItem')
 def deleteItemPage():
     query = '''SELECT products.id, products.name FROM products;'''
-    dbresult = sendDBQuery(query)
+    dbresult = sendDBQuery(query, './stock.db')
     rows = dbresult.fetchall()
     items = [f"{i[1]} (ID: {i[0]})" for i in rows]
 
@@ -89,7 +90,7 @@ def addItem():
     if request.form.get("id") == "addItem":
         if post_data['stockCost']:
             query = f'''INSERT INTO main.products (name, supplier, sku) VALUES('{post_data['productName']}', '{post_data['productSupplier']}', '{post_data['productSKU']}');'''
-            dbresult = sendDBQuery(query)
+            dbresult = sendDBQuery(query, './stock.db')
             query = f'''INSERT INTO main.stock VALUES({dbresult.lastrowid}, '{post_data['stockCost']}', '{post_data['stockUpdate']}', unixepoch('{post_data['stockDate']}'));'''
         else:
             query = f'''INSERT INTO main.products (name, supplier, sku) VALUES('{post_data['productName']}', '{post_data['productSupplier']}', '{post_data['productSKU']}');'''
@@ -98,7 +99,7 @@ def addItem():
     elif request.form.get("id") == 'deleteItem':
         query = f'''DELETE FROM main.products WHERE id = {post_data['item'].split("(")[1].removeprefix('ID: ').removesuffix(")")};'''
 
-    sendDBQuery(query)
+    sendDBQuery(query, './stock.db')
 
     return redirect("/", 303)
 

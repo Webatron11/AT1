@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Database" uuid="8fd90758-1f89-4daf-921d-1491b94e831f">
+    <data-source source="LOCAL" name="Stock" uuid="8fd90758-1f89-4daf-921d-1491b94e831f">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:database.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:stock.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
         <property name="foreign_keys" value="true" />
       </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="Auth" uuid="d1f6901f-448b-4b44-a8ac-cc24d17fc14a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:auth.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>
